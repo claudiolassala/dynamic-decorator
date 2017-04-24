@@ -1,0 +1,8 @@
+﻿<Window x:Class="Sample.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel>
+        <Button x:Name="Sample1Button" Click="Sample1Button_OnClick">Sample 1</Button>
+    </StackPanel>
+</Window>
