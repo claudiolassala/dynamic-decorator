@@ -12,7 +12,7 @@ namespace Sample.Wpf
             {
                 var backgroundProperty = $"{definition.PropertyName}_Background";
                 decoratedDto.RegisterPropertyDependencies(backgroundProperty, definition.DependsOn);
-                decoratedDto.Register(backgroundProperty, p => definition.Func(decoratedDto.GetDto<InvoiceItemViewModel>()), (p, newValue) => {});
+                decoratedDto.Register(backgroundProperty, () => definition.Func(decoratedDto.GetDto<InvoiceItemViewModel>()), newValue => {});
             });
         }
 

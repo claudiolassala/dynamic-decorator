@@ -21,9 +21,8 @@ namespace DynamicDecorator
             var row = dto as DataRow;
             foreach (DataColumn column in row.Table.Columns)
             {
-                Func<string, object> valueGetter = p => row[column.ColumnName];
-                Action<string, object> valueSetter =
-                    (p, newValue) => row[column.ColumnName] = newValue;
+                Func<object> valueGetter = () => row[column.ColumnName];
+                Action< object> valueSetter = newValue => row[column.ColumnName] = newValue;
                 Register(column.ColumnName, valueGetter, valueSetter);
             }
         }

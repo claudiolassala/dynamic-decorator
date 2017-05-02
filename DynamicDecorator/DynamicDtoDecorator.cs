@@ -11,7 +11,7 @@ namespace DynamicDecorator
     {
         readonly object _dto;
         readonly Dictionary<string, Action> _actions = new Dictionary<string, Action>();
-        readonly Dictionary<string, RowPropertyValue> _members = new Dictionary<string, RowPropertyValue>();
+        readonly Dictionary<string, PropertyAccessor> _members = new Dictionary<string, PropertyAccessor>();
         readonly Dictionary<string, IEnumerable<string>> _propertyDependencies = new Dictionary<string, IEnumerable<string>>();
 
         public DynamicDtoDecorator(object dto)
@@ -56,23 +56,21 @@ namespace DynamicDecorator
                 .ForEach(prop =>
                 {
                     object[] notIndexedProperty = null;
-                    Func<string, object> valueGetter = p => prop.GetValue(dto, notIndexedProperty);
-                    Action<string, object> valueSetter =
-                        (p, newValue) => prop.SetValue(dto, newValue, notIndexedProperty);
+                    Func<object> valueGetter = () => prop.GetValue(dto, notIndexedProperty);
+                    Action<object> valueSetter = newValue => prop.SetValue(dto, newValue, notIndexedProperty);
                     Register(prop.Name, valueGetter, valueSetter);
                 });
         }
 
-        public void Register(string propertyName, Func<string, object> valueGetter,
-            Action<string, object> valueSetter)
+        public void Register(string propertyName, Func<object> valueGetter, Action<object> valueSetter)
         {
             var fullPropertyName = propertyName;
 
             if (_members.ContainsKey(fullPropertyName))
                 return;
 
-            dynamic initialValue = valueGetter.Invoke(propertyName);
-            var propertyValue = new RowPropertyValue(propertyName, valueGetter, valueSetter, initialValue);
+            dynamic initialValue = valueGetter.Invoke();
+            var propertyValue = new PropertyAccessor(propertyName, valueGetter, valueSetter, initialValue);
             _members.Add(fullPropertyName, propertyValue);
         }
 
