@@ -4,11 +4,11 @@ namespace DynamicDecorator
 {
     public class DependsOnAttribute : Attribute
     {
-        public string PropertyName { get; set; }
+        public string PropertyNames { get; set; }
 
-        public DependsOnAttribute(string propertyName)
+        public DependsOnAttribute(string propertyNames)
         {
-            PropertyName = propertyName;
+            PropertyNames = propertyNames;
         }
     }
 }

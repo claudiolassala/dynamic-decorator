@@ -98,6 +98,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="property_accessor_spec.cs" />
+    <Compile Include="dependent_property_changed_spec.cs" />
     <Compile Include="property_changed_spec.cs" />
     <Compile Include="value_converter_spec.cs" />
     <Compile Include="indexer_spec.cs" />

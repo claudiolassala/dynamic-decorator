@@ -59,6 +59,12 @@ namespace DynamicDecorator
                     Func<object> valueGetter = () => prop.GetValue(dto, notIndexedProperty);
                     Action<object> valueSetter = newValue => prop.SetValue(dto, newValue, notIndexedProperty);
                     Register(prop.Name, valueGetter, valueSetter);
+
+                    var dependsOn = prop.GetCustomAttributes(true).OfType<DependsOnAttribute>().SingleOrDefault();
+                    if (dependsOn != null)
+                    {
+                        RegisterPropertyDependencies(prop.Name, Array.ConvertAll(dependsOn.PropertyNames.Split(','), d => d.Trim()));
+                    }
                 });
         }
 

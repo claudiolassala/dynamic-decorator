@@ -57,7 +57,10 @@ namespace Sample.Wpf
         private void UppercaseAllButton_OnClick(object sender, RoutedEventArgs e)
         {
             foreach (dynamic item in (DataContext as DynamicDtoDecorator).GetDto<InvoiceViewModel>().Items)
+            {
                 item.ProductName = item.ProductName.ToUpper();
+                item.Quantity += 1;
+            }
         }
     }
 }
