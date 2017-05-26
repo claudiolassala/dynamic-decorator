@@ -25,8 +25,8 @@ namespace Sample.Wpf
                 vm => vm.ProductName == "Banana",
                 new Dictionary<object, object>
                 {
-                    {"true", Brushes.Green},
-                    {"false", Brushes.Yellow}
+                    {true, Brushes.Green},
+                    {false, Brushes.Yellow}
                 });
             yield return new CellBackgroundDefinition<InvoiceItemViewModel>("Category",
                 new[] { "Category" },
