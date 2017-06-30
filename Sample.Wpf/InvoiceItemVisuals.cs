@@ -16,8 +16,6 @@ namespace Sample.Wpf
             });
         }
 
-        private List<CellBackgroundDefinition<InvoiceItemViewModel>> _backgroundDefinitions;
-
         public IEnumerable<CellBackgroundDefinition<InvoiceItemViewModel>> GetCellBackgrounds()
         {
             yield return new CellBackgroundDefinition<InvoiceItemViewModel>("ProductName",
